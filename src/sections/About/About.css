@@ -1,0 +1,1693 @@
+/* =========================================================
+   ABOUT SECTION
+========================================================= */
+.about-section {
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+
+  --nav-space: clamp(220px, 22vw, 340px);
+
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  background:
+    radial-gradient(
+      circle at 75% 45%,
+      rgba(115, 76, 255, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(85, 119, 255, 0.08),
+      transparent 30%
+    ),
+    #060714;
+
+  color: #ffffff;
+
+  isolation: isolate;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  padding:
+    4rem
+    clamp(2rem, 8vw, 8rem)
+    1.5rem
+    calc(
+      clamp(2rem, 8vw, 8rem)
+      + var(--nav-space)
+    );
+}
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.about-background {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: -3;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.about-grid {
+  position: absolute;
+  inset: -20%;
+
+  opacity: 0.14;
+
+  background-image:
+    linear-gradient(
+      rgba(151, 131, 255, 0.13) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(151, 131, 255, 0.13) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  transform:
+    perspective(700px)
+    rotateX(63deg)
+    translateY(22%)
+    translateX(var(--mouse-x));
+
+  transition:
+    transform 0.8s cubic-bezier(.2,.8,.2,1);
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 25%,
+      black 65%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   GLOWS
+========================================================= */
+
+.about-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  filter: blur(100px);
+
+  opacity: 0.14;
+
+  animation:
+    aboutGlowMove 10s ease-in-out infinite alternate;
+}
+
+.about-glow--one {
+  top: 10%;
+  right: 5%;
+
+  background: #7656ff;
+}
+
+.about-glow--two {
+  bottom: -15%;
+  left: 20%;
+
+  background: #4267ff;
+
+  animation-delay: -5s;
+}
+
+@keyframes aboutGlowMove {
+  from {
+    transform: translate3d(
+      calc(var(--mouse-x) * -0.4),
+      calc(var(--mouse-y) * -0.4),
+      0
+    );
+  }
+
+  to {
+    transform: translate3d(
+      calc(var(--mouse-x) * 0.4 + 30px),
+      calc(var(--mouse-y) * 0.4 - 20px),
+      0
+    );
+  }
+}
+
+
+/* =========================================================
+   ORBITS
+========================================================= */
+
+.about-orbit {
+  position: absolute;
+
+  border: 1px solid rgba(154, 132, 255, 0.2);
+
+  border-radius: 50%;
+
+  transform:
+    translate(
+      var(--mouse-x),
+      var(--mouse-y)
+    );
+
+  transition:
+    transform 1s cubic-bezier(.2,.8,.2,1);
+
+  animation:
+    orbitRotate 18s linear infinite;
+}
+
+.about-orbit--one {
+  width: 480px;
+  height: 480px;
+
+  right: 4%;
+  top: 15%;
+
+  transform:
+    translate(
+      var(--mouse-x),
+      var(--mouse-y)
+    )
+    rotate(25deg)
+    scaleY(0.42);
+}
+
+.about-orbit--two {
+  width: 570px;
+  height: 570px;
+
+  right: 0%;
+  top: 9%;
+
+  border-color:
+    rgba(130, 108, 255, 0.12);
+
+  transform:
+    translate(
+      var(--mouse-x),
+      var(--mouse-y)
+    )
+    rotate(-35deg)
+    scaleY(0.35);
+
+  animation-duration: 25s;
+  animation-direction: reverse;
+}
+
+.about-orbit--three {
+  width: 390px;
+  height: 390px;
+
+  right: 10%;
+  top: 25%;
+
+  border-style: dashed;
+
+  opacity: 0.5;
+
+  transform:
+    translate(
+      var(--mouse-x),
+      var(--mouse-y)
+    )
+    rotate(60deg)
+    scaleY(0.5);
+
+  animation-duration: 14s;
+}
+
+@keyframes orbitRotate {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+.about-particle {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #a78bff;
+
+  box-shadow:
+    0 0 12px rgba(157, 125, 255, 0.8);
+
+  animation:
+    particleFloat 5s ease-in-out infinite;
+}
+
+.about-particle--1 {
+  left: 42%;
+  top: 22%;
+}
+
+.about-particle--2 {
+  right: 25%;
+  top: 32%;
+
+  animation-delay: -1s;
+}
+
+.about-particle--3 {
+  right: 12%;
+  bottom: 30%;
+
+  animation-delay: -3s;
+}
+
+.about-particle--4 {
+  left: 16%;
+  bottom: 25%;
+
+  animation-delay: -2s;
+}
+
+.about-particle--5 {
+  left: 58%;
+  bottom: 18%;
+
+  animation-delay: -4s;
+}
+
+@keyframes particleFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: translateY(-18px) scale(1.6);
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   WATERMARK
+========================================================= */
+
+.about-watermark {
+  position: absolute;
+
+  left: var(--nav-space);
+  right: -2vw;
+  bottom: -5vh;
+
+  font-size:
+    clamp(8rem, 21vw, 23rem);
+
+  font-weight: 800;
+
+  line-height: 0.8;
+
+  letter-spacing: -0.08em;
+
+  color: transparent;
+
+  -webkit-text-stroke:
+    1px rgba(255, 255, 255, 0.045);
+
+  pointer-events: none;
+
+  user-select: none;
+
+  z-index: -2;
+
+  transform:
+    translate(
+      calc(var(--mouse-x) * -0.25),
+      calc(var(--mouse-y) * -0.25)
+    );
+
+  transition:
+    transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =========================================================
+   TOP LINE
+========================================================= */
+
+.about-topline {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom: 1rem;
+
+  flex-shrink: 0;
+
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+.about--visible .about-topline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-index {
+  font-family: var(--font-mono);
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.15em;
+
+  color: #9279ff;
+}
+
+.about-line {
+  width: 70px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #9279ff,
+      transparent
+    );
+}
+
+.about-label {
+  font-family: var(--font-mono);
+
+  font-size: 0.68rem;
+
+  letter-spacing: 0.18em;
+
+  color: rgba(255, 255, 255, 0.45);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+.about-content {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 1450px;
+
+  flex: 1;
+
+  min-height: 0;
+
+  margin:
+    0
+    auto
+    0
+    0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(0, 0.85fr);
+
+  gap:
+    clamp(1.5rem, 4vw, 7rem);
+
+  align-items: center;
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.about-intro {
+  max-width: 720px;
+
+  opacity: 0;
+
+  transform: translateY(45px);
+
+  transition:
+    opacity 1s ease 0.15s,
+    transform 1s cubic-bezier(.2,.8,.2,1) 0.15s;
+}
+
+.about--visible .about-intro {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.about-kicker {
+  display: flex;
+  align-items: center;
+
+  gap: 0.7rem;
+
+  font-family: var(--font-mono);
+
+  font-size: 0.65rem;
+
+  letter-spacing: 0.18em;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  margin-bottom: 0.9rem;
+}
+
+.about-kicker-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #987cff;
+
+  box-shadow:
+    0 0 15px #987cff;
+
+  animation:
+    aboutPulse 2s ease-in-out infinite;
+}
+
+@keyframes aboutPulse {
+  0%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.about-title {
+  margin: 0;
+
+  font-size:
+    clamp(4rem, 7vw, 7rem);
+
+  line-height: 0.82;
+
+  letter-spacing: -0.075em;
+
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+.about-title span {
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 0%,
+      #9d82ff 45%,
+      #6749ef 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  background-size: 200% 100%;
+
+  animation:
+    aboutGradient 6s ease-in-out infinite;
+}
+
+@keyframes aboutGradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+
+/* =========================================================
+   TITLE LINE
+========================================================= */
+
+.about-title-line {
+  width: 100px;
+  height: 2px;
+
+  margin:
+    2rem 0
+    1.7rem;
+
+  background:
+    linear-gradient(
+      90deg,
+      #8b6cff,
+      transparent
+    );
+
+  transform-origin: left;
+
+  transform: scaleX(0);
+
+  transition:
+    transform 1s ease 0.8s;
+}
+
+.about--visible .about-title-line {
+  transform: scaleX(1);
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.about-lead {
+  max-width: 620px;
+
+  margin: 0 0 1rem;
+
+  font-size: clamp(0.85rem, 1vw, 1rem);
+
+  line-height: 1.65;
+
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.72);
+} 
+
+.about-description {
+  max-width: 620px;
+
+  margin: 0;
+
+  font-size:
+    clamp(0.9rem, 1.1vw, 1rem);
+
+  line-height: 1.8;
+
+  color:
+    rgba(255, 255, 255, 0.43);
+}
+
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
+.about-signature {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-top: 2.5rem;
+
+  font-family: var(--font-mono);
+
+  font-size: 0.65rem;
+
+  letter-spacing: 0.18em;
+
+  color:
+    rgba(255, 255, 255, 0.4);
+}
+
+.signature-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border:
+    1px solid rgba(145, 121, 255, 0.35);
+
+  border-radius: 50%;
+
+  color: #9b82ff;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.about-signature:hover .signature-arrow {
+  transform: rotate(45deg);
+
+  background:
+    rgba(140, 110, 255, 0.12);
+}
+
+
+/* =========================================================
+   INFORMATION SIDE
+========================================================= */
+
+.about-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1px;
+
+  opacity: 0;
+
+  transform: translateX(50px);
+
+  transition:
+    opacity 1s ease 0.35s,
+    transform 1s cubic-bezier(.2,.8,.2,1) 0.35s;
+}
+
+.about--visible .about-info {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   INFO CARD
+========================================================= */
+
+.about-info-card {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 45px 1fr auto;
+
+  gap: 1.2rem;
+
+  align-items: start;
+
+  padding:
+    1.6rem 1.2rem;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025),
+      transparent
+    );
+
+  transition:
+    background 0.4s ease,
+    padding 0.4s ease;
+}
+
+.about-info-card:last-child {
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-info-card:hover {
+  padding-left: 1.7rem;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(126, 93, 255, 0.12),
+      rgba(255, 255, 255, 0.015)
+    );
+}
+
+
+/* =========================================================
+   CARD NUMBER
+========================================================= */
+
+.about-card-number {
+  font-family: var(--font-mono);
+
+  font-size: 0.65rem;
+
+  color:
+    rgba(151, 125, 255, 0.8);
+
+  padding-top: 0.2rem;
+}
+
+
+/* =========================================================
+   CARD LABEL
+========================================================= */
+
+.about-card-label {
+  display: block;
+
+  font-family: var(--font-mono);
+
+  font-size: 0.62rem;
+
+  letter-spacing: 0.16em;
+
+  color:
+    rgba(255, 255, 255, 0.38);
+
+  margin-bottom: 0.55rem;
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.about-card-content h3 {
+  margin: 0 0 0.55rem;
+
+  font-size:
+    clamp(1rem, 1.4vw, 1.25rem);
+
+  font-weight: 500;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+========================================================= */
+
+.about-card-content p {
+  margin: 0;
+
+  max-width: 350px;
+
+  font-size: 0.8rem;
+
+  line-height: 1.6;
+
+  color:
+    rgba(255, 255, 255, 0.42);
+}
+
+
+/* =========================================================
+   CARD ARROW
+========================================================= */
+
+.about-card-arrow {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 50%;
+
+  color:
+    rgba(255, 255, 255, 0.45);
+
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.about-info-card:hover .about-card-arrow {
+  transform: translate(3px, -3px);
+
+  color: #a38bff;
+
+  border-color:
+    rgba(151, 125, 255, 0.5);
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.about-bottom {
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: auto 1fr auto;
+
+  align-items: center;
+
+  gap: 1.5rem;
+
+  margin-top: auto;
+
+  padding-top: 4rem;
+}
+
+.about-scroll-text,
+.about-next {
+  font-family: var(--font-mono);
+
+  font-size: 0.6rem;
+
+  letter-spacing: 0.14em;
+
+  color:
+    rgba(255, 255, 255, 0.3);
+}
+
+.about-next {
+  color:
+    rgba(153, 127, 255, 0.7);
+}
+
+
+/* =========================================================
+   BOTTOM LINE
+========================================================= */
+
+.about-bottom-line {
+  position: relative;
+
+  height: 1px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+}
+
+.about-bottom-line span {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 25%;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #9376ff,
+      transparent
+    );
+
+  animation:
+    aboutProgress 3s ease-in-out infinite;
+}
+
+@keyframes aboutProgress {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(500%);
+  }
+}
+
+
+/* =========================================================
+   LARGE SCREENS
+========================================================= */
+
+@media (min-width: 1400px) {
+  .about-section {
+    padding-left: calc(10rem + var(--nav-space));
+    padding-right: 10rem;
+  }
+
+  .about-content {
+    max-width: 1600px;
+  }
+}
+
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1300px) {
+  .about-section {
+    --nav-space: clamp(170px, 16vw, 230px);
+
+    padding-top: 3rem;
+  }
+
+  .about-content {
+    gap: clamp(1.25rem, 3vw, 3rem);
+  }
+
+  .about-title {
+    font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+  }
+
+  .about-title-line {
+    margin: 1.4rem 0 1.2rem;
+  }
+
+  .about-lead,
+  .about-description {
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .about-intro {
+    max-width: 480px;
+  }
+
+  .about-signature {
+    margin-top: 1.5rem;
+  }
+
+  .about-info-card {
+    padding: 1.1rem 0.9rem;
+    gap: 0.9rem;
+  }
+
+  .about-card-content h3 {
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  }
+
+  .about-card-content p {
+    max-width: none;
+    font-size: 0.72rem;
+  }
+
+  .about-watermark {
+    font-size: clamp(6rem, 16vw, 14rem);
+  }
+
+  .about-orbit--one,
+  .about-orbit--two,
+  .about-orbit--three {
+    right: -15%;
+  }
+}
+
+
+/* =========================================================
+   NARROW LAPTOP (still 2-column, tighter still)
+========================================================= */
+
+@media (max-width: 950px) {
+  .about-section {
+    --nav-space: clamp(130px, 13vw, 180px);
+  }
+
+  .about-content {
+    gap: 1.1rem;
+  }
+
+  .about-title {
+    font-size: clamp(2.1rem, 6vw, 3.2rem);
+  }
+
+  .about-intro {
+    max-width: 380px;
+  }
+
+  .about-info-card {
+    grid-template-columns: 30px 1fr auto;
+    padding: 0.9rem 0.7rem;
+    gap: 0.7rem;
+  }
+
+  .about-card-number {
+    font-size: 0.58rem;
+  }
+
+  .about-card-arrow {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .about-section {
+    --nav-space: 0px;
+
+    min-height: 100svh;
+
+    padding:
+      6rem
+      1.5rem
+      2rem;
+  }
+
+  .about-watermark {
+    left: 0;
+    right: -20vw;
+    bottom: 5vh;
+
+    font-size: 35vw;
+  }
+
+  .about-topline {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-content {
+    width: 100%;
+
+    margin: 0;
+
+    grid-template-columns: 1fr;
+
+    gap: 2rem;
+  }
+
+  .about-intro {
+    width: 100%;
+    max-width: none;
+  }
+
+  .about-title {
+    font-size:
+      clamp(3.4rem, 16vw, 5.5rem);
+
+    line-height: 0.84;
+  }
+
+  .about-lead {
+    max-width: 620px;
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .about-description {
+    max-width: 620px;
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .about-signature {
+    margin-top: 1.35rem;
+  }
+
+  .about-info-card {
+    grid-template-columns:
+      35px 1fr auto;
+
+    padding:
+      1.25rem;
+  }
+
+  .about-card-content h3 {
+    font-size: 0.95rem;
+  }
+
+  .about-card-content p {
+    font-size: 0.75rem;
+  }
+
+  .about-card-arrow {
+    width: 27px;
+    height: 27px;
+  }
+
+  .about-bottom {
+    grid-template-columns: 1fr auto;
+
+    padding-top: 3rem;
+  }
+
+  .about-bottom-line {
+    display: none;
+  }
+
+  .about-scroll-text {
+    display: none;
+  }
+
+  .about-orbit--one {
+    width: 350px;
+    height: 350px;
+
+    right: -35%;
+    top: 20%;
+  }
+
+  .about-orbit--two {
+    width: 420px;
+    height: 420px;
+
+    right: -45%;
+    top: 15%;
+  }
+
+  .about-orbit--three {
+    width: 280px;
+    height: 280px;
+
+    right: -20%;
+  }
+}
+
+/* =========================================================
+   DESKTOP / LAPTOP — TRUE VIEWPORT FIT
+   Same fix already applied to the projects and skills
+   sections: without this, .about-section only had
+   min-height: 100vh, so on shorter/laptop screens the 3
+   info cards could push the section's real height past
+   one viewport. That extra height is what caused the
+   "extra scroll" — the page became taller than the
+   window inside this section, which throws off anchor/
+   nav scrolling and makes it feel like the section gets
+   stuck instead of moving cleanly to the next one.
+
+   Locking the section to height: 100vh and letting
+   .about-info scroll internally (only if it truly needs
+   more room than the screen has) keeps the whole page's
+   scroll length exactly what it should be.
+========================================================= */
+
+@media (min-width: 801px) {
+
+  .about-section {
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .about-content {
+    max-height: none;
+    align-items: stretch;
+  }
+
+  .about-intro {
+    align-self: center;
+  }
+
+  .about-info {
+    max-height: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+
+    padding-right: 6px;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  }
+
+  .about-info::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .about-info::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .about-info::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-section *,
+  .about-section *::before,
+  .about-section *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}
+
+/* =====================================================
+   READ MORE
+===================================================== */
+
+.about-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  margin-top: 0.7rem;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  cursor: pointer;
+
+  opacity: 0;
+  transform: translateY(5px);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.about-read-more span {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+
+/* SHOW ON CARD HOVER */
+
+.about-info-card:hover .about-read-more {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-read-more:hover {
+  color: #ffffff;
+}
+
+.about-read-more:hover span {
+  transform: translate(3px, -3px);
+}
+
+/* =====================================================
+   POPUP OVERLAY
+===================================================== */
+
+.about-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  background: rgba(5, 6, 18, 0.72);
+
+  backdrop-filter: blur(14px);
+
+  overflow: hidden;
+
+  animation: aboutModalFade 0.25s ease;
+}
+
+
+/* =====================================================
+   POPUP CONTAINER
+===================================================== */
+
+.about-modal {
+  position: relative;
+
+  width: min(560px, 100%);
+
+  /*
+     IMPORTANT:
+     Never allow popup to become taller
+     than the viewport.
+  */
+
+  max-height: calc(100vh - 48px);
+
+  box-sizing: border-box;
+
+  padding: 38px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 18px;
+
+  background: rgba(15, 16, 32, 0.97);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(118, 104, 255, 0.12);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  overscroll-behavior: contain;
+
+  scrollbar-width: thin;
+
+  animation: aboutModalIn 0.3s ease;
+}
+
+
+/* =====================================================
+   CUSTOM SCROLLBAR
+===================================================== */
+
+.about-modal::-webkit-scrollbar {
+  width: 5px;
+}
+
+.about-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.about-modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+
+  border-radius: 10px;
+}
+
+.about-modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.about-modal-close {
+  position: sticky;
+
+  float: right;
+
+  top: 0;
+
+  z-index: 5;
+
+  width: 34px;
+  height: 34px;
+
+  margin-left: 15px;
+  margin-bottom: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 50%;
+
+  background: rgba(20, 21, 38, 0.9);
+
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.about-modal-close:hover {
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  transform: rotate(90deg);
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.about-modal-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 0.65rem;
+
+  letter-spacing: 0.15em;
+
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.about-modal h3 {
+  margin: 0;
+
+  font-size: 1.9rem;
+
+  line-height: 1.2;
+}
+
+
+/* =====================================================
+   DIVIDER
+===================================================== */
+
+.about-modal-line {
+  width: 50px;
+
+  height: 1px;
+
+  margin: 20px 0;
+
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.about-modal p {
+  margin: 0;
+
+  white-space: pre-line;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 0.9rem;
+
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes aboutModalFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes aboutModalIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(15px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .about-modal-overlay {
+    padding: 16px;
+  }
+
+  .about-modal {
+    width: 100%;
+
+    max-height: calc(100vh - 32px);
+
+    padding: 28px 22px;
+
+    border-radius: 16px;
+  }
+
+  .about-modal h3 {
+    font-size: 1.6rem;
+  }
+
+  .about-modal p {
+    font-size: 0.88rem;
+
+    line-height: 1.75;
+  }
+
+}
+
+/* =========================================================
+   FIX — ABOUT SECTION MUST NOT CREATE A SECOND SCROLLBAR
+   KEEP .about-info CARD SCROLLBAR
+========================================================= */
+
+@media (min-width: 801px) {
+
+  .about-section {
+    height: 100vh;
+    min-height: 100vh;
+
+    /*
+      Prevent the ABOUT SECTION itself from becoming
+      another scroll container.
+    */
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    box-sizing: border-box;
+  }
+
+  /*
+    KEEP THIS SCROLLBAR.
+    This is the scrollbar for the 3 About cards.
+  */
+  .about-info {
+    height: 100%;
+    max-height: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+
+    padding-right: 6px;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+      rgba(255, 255, 255, 0.18)
+      transparent;
+  }
+
+  .about-info::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .about-info::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .about-info::-webkit-scrollbar-thumb {
+    background:
+      rgba(255, 255, 255, 0.18);
+
+    border-radius: 10px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE/TABLET PAGE SCROLL
+========================================================= */
+
+@media (max-width: 1023px) {
+
+  .about-section,
+  .about-content,
+  .about-info {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+
+    overflow: visible !important;
+    overscroll-behavior: auto !important;
+  }
+}

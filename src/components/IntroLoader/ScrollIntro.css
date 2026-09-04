@@ -1,0 +1,379 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  --si-bg: #05060d;
+  --si-bg-2: #0a0d1c;
+  --si-purple: #8b7cf7;
+  --si-blue: #4fc3f7;
+  --si-text: #f5f5f8;
+  --si-muted: #8b93a7;
+  --si-line: rgba(139, 124, 247, 0.35);
+ --si-photo-w: min(52vw, 760px);
+--si-photo-h: min(92vh, 900px);
+}
+
+.si-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(120% 90% at 50% 40%, #171233 0%, var(--si-bg-2) 45%, var(--si-bg) 100%);
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  color: var(--si-text);
+  touch-action: none;
+  transition: opacity 0.6s ease;
+}
+
+.si-root.si-exiting { opacity: 0; }
+
+.si-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.si-cursor-glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  margin: -350px 0 0 -350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 124, 247, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+  transition: left 0.4s linear, top 0.4s linear;
+  z-index: 0;
+}
+
+.si-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.65) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.si-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, #fff 0%, var(--si-purple) 35%, transparent 70%);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 6;
+}
+
+.si-stars { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.si-star {
+  position: absolute; width: 2px; height: 2px; border-radius: 50%;
+  background: #fff; opacity: 0.5;
+  animation: si-twinkle 3.2s ease-in-out infinite; will-change: transform;
+}
+@keyframes si-twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.85; } }
+
+.si-header {
+  position: absolute; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 32px 48px;
+  font-family: "Space Grotesk", sans-serif; font-size: 13px; letter-spacing: 0.14em;
+  color: var(--si-muted); z-index: 5;
+}
+.si-logo { display: flex; align-items: center; gap: 10px; color: var(--si-text); font-weight: 600; }
+.si-logo-mark {
+  width: 26px; height: 26px; display: grid; place-items: center; border-radius: 7px;
+  background: linear-gradient(135deg, var(--si-purple), var(--si-blue));
+  font-size: 13px; color: #0a0d1c;
+}
+.si-header-right { display: flex; align-items: center; gap: 8px; }
+.si-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; }
+
+.si-footer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding: 28px 48px 34px; z-index: 5;
+}
+.si-footer-side {
+  display: flex; flex-direction: column; gap: 3px;
+  font-size: 11px; letter-spacing: 0.18em; color: var(--si-muted);
+  font-family: "Space Grotesk", sans-serif;
+}
+.si-footer-right { align-items: flex-end; }
+.si-scroll-icon {
+  width: 26px; height: 40px; border: 1px solid var(--si-line); border-radius: 14px;
+  display: grid; place-items: start center; padding-top: 6px;
+}
+.si-scroll-icon i {
+  width: 3px; height: 8px; border-radius: 2px; background: var(--si-purple);
+  animation: si-scrollDown 1.6s ease-in-out infinite;
+}
+@keyframes si-scrollDown {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(10px); opacity: 0; }
+  71% { transform: translateY(0); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.si-progress { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 160px; }
+.si-progress-track { width: 160px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+.si-progress-fill { height: 100%; background: linear-gradient(90deg, var(--si-purple), var(--si-blue)); transition: width 0.1s linear; }
+.si-progress-label { font-size: 11px; letter-spacing: 0.14em; color: var(--si-muted); font-family: "Space Grotesk", sans-serif; }
+
+.si-corner { position: absolute; width: 22px; height: 22px; border-color: var(--si-line); border-style: solid; border-width: 0; opacity: 0.6; z-index: 5; }
+.si-corner-tl { top: 86px; left: 48px; border-top-width: 1px; border-left-width: 1px; }
+.si-corner-tr { top: 86px; right: 48px; border-top-width: 1px; border-right-width: 1px; }
+.si-corner-bl { bottom: 96px; left: 48px; border-bottom-width: 1px; border-left-width: 1px; }
+.si-corner-br { bottom: 96px; right: 48px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* ---- full-bleed vertical type stack, photo pinned dead-center ---- */
+.si-type-scene {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  z-index: 2;
+}
+
+.si-type-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 90px 4vw;
+  transition: opacity 0.15s linear;
+}
+
+.si-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-family: "Space Grotesk", sans-serif; font-size: 13px; letter-spacing: 0.3em;
+  color: var(--si-purple); margin-bottom: 22px; z-index: 3;
+}
+.si-eyebrow i { width: 26px; height: 1px; background: var(--si-purple); display: inline-block; }
+
+.si-word {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  margin: 0;
+  width: 100%;
+  will-change: transform;
+}
+
+.si-word-top {
+  position: relative;
+  font-size: clamp(38px, 6.4vw, 96px);
+  color: transparent;
+  -webkit-text-stroke: 1.4px rgba(245, 245, 248, 0.5);
+  z-index: 1;
+}
+
+/* invisible spacer so the top/bottom words sit symmetrically around the photo */
+.si-photo-gap {
+  width: 1px;
+  height: calc(var(--si-photo-h) + 20px);
+  flex-shrink: 0;
+}
+
+
+
+/* front accent word, overlapping the top edge of the photo, above it in z-order */
+.si-word-accent {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center;
+  font-size: clamp(26px, 3.6vw, 46px);
+  color: var(--si-text);
+  text-align: center;
+  white-space: nowrap;
+  z-index: 4;
+  margin-top: calc(var(--si-photo-h) / -2 + 30px);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* the tiltable photo, dead-center of the viewport, feathered edges */
+/* =========================================================
+   HERO PERSON
+   Large, centered, extending to the bottom
+   ========================================================= */
+
+.si-photo-tilt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: var(--si-photo-w);
+  height: var(--si-photo-h);
+
+  transform-style: preserve-3d;
+  transform-origin: center center;
+
+  z-index: 3;
+
+  background:
+    radial-gradient(
+      ellipse 45% 50% at 50% 52%,
+      rgba(105, 72, 255, 0.30) 0%,
+      rgba(105, 72, 255, 0.12) 35%,
+      transparent 72%
+    );
+
+  pointer-events: none;
+}
+.si-photo-tilt img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  display: block;
+
+  mix-blend-mode: normal;
+
+  /*
+   * Make the person crisp and cinematic.
+   */
+  filter:
+    contrast(1.12)
+    saturate(1.08)
+    brightness(1.05)
+    drop-shadow(0 0 30px rgba(139, 124, 247, 0.18));
+
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+/* darkens the feathered edge toward the scene background so a plain/white
+   backdrop in the source photo blends out instead of showing as a box */
+/* =========================================================
+   BOTTOM TEXT — ABOVE THE PERSON
+   ========================================================= */
+
+.si-bottom-name {
+  position: absolute;
+
+  left: 50%;
+  top: 85%;
+
+  width: 100%;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: clamp(52px, 9.5vw, 140px);
+
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+
+  text-align: center;
+  white-space: nowrap;
+
+  background: linear-gradient(
+    100deg,
+    #ffffff 15%,
+    var(--si-purple) 60%,
+    var(--si-blue) 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  z-index: 10;
+
+  pointer-events: none;
+
+  will-change: transform, opacity;
+
+  text-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.35),
+    0 0 30px rgba(139, 124, 247, 0.12);
+}
+
+@media (max-width: 900px) {
+  :root { --si-photo-w: min(64vw, 300px); --si-photo-h: min(40vh, 340px); }
+  .si-header, .si-footer { padding: 22px 22px 26px; }
+  .si-type-layer { padding: 100px 20px; }
+  .si-word-top { font-size: clamp(28px, 8vw, 46px); }
+  .si-word-bottom { font-size: clamp(38px, 13vw, 72px); }
+  .si-word-accent { font-size: clamp(20px, 5vw, 30px); }
+  .si-photo-gap { height: calc(var(--si-photo-h) + 40px); }
+  .si-corner-bl, .si-corner-br { display: none; }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --si-photo-w: min(74vw, 275px);
+    --si-photo-h: min(45svh, 365px);
+  }
+
+  .si-header {
+    align-items: flex-start;
+    padding: 20px 18px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  .si-logo,
+  .si-header-right {
+    max-width: 44%;
+    line-height: 1.2;
+  }
+
+  .si-header-right {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .si-type-layer {
+    padding: 92px 18px 120px;
+  }
+
+  .si-eyebrow {
+    margin-bottom: 14px;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+  }
+
+  .si-word-top {
+    max-width: calc(100vw - 36px);
+    font-size: clamp(26px, 10vw, 40px);
+    overflow-wrap: anywhere;
+  }
+
+  .si-word-accent {
+    max-width: calc(100vw - 36px);
+    margin-top: calc(var(--si-photo-h) / -2 + 24px);
+    font-size: clamp(20px, 6vw, 28px);
+    line-height: 1;
+    white-space: normal;
+  }
+
+  .si-bottom-name {
+    top: 84%;
+    width: calc(100vw - 22px);
+    max-width: calc(100vw - 22px);
+    font-size: clamp(32px, 9.2vw, 40px);
+    white-space: nowrap;
+  }
+
+  .si-footer {
+    padding: 20px 18px 24px;
+  }
+
+  .si-progress {
+    min-width: 150px;
+  }
+
+  .si-progress-track {
+    width: 150px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .si-star, .si-scroll-icon i { animation: none; }
+  .si-cursor-glow { transition: none; }
+}
