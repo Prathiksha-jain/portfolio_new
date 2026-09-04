@@ -7,13 +7,7 @@ export default function Contact() {
   const [formStatus, setFormStatus] = useState("");
   const [isSending, setIsSending] = useState(false);
 
-  const contactApiUrl =
-    import.meta.env.VITE_FORMSPREE_ENDPOINT ||
-    import.meta.env.VITE_CONTACT_API_URL ||
-    "/api/contact";
-
-  const usesFormspree =
-    contactApiUrl.includes("formspree.io");
+  const contactApiUrl = "/api/contact";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,31 +29,18 @@ export default function Contact() {
     setFormStatus("Sending...");
 
     try {
-      const response = usesFormspree
-        ? await fetch(contactApiUrl, {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-            },
-            body: createFormspreePayload({
-              email,
-              formData,
-              message,
-              name,
-            }),
-          })
-        : await fetch(contactApiUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name,
-              email,
-              message,
-              website,
-            }),
-          });
+      const response = await fetch(contactApiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          website,
+        }),
+      });
 
       const result = await response.json().catch(() => ({}));
 
@@ -78,32 +59,6 @@ export default function Contact() {
     } finally {
       setIsSending(false);
     }
-  };
-
-  const createFormspreePayload = ({
-    email,
-    formData,
-    message,
-    name,
-  }) => {
-    const payload = new FormData();
-
-    payload.set("name", name);
-    payload.set("email", email);
-    payload.set("message", message);
-    payload.set("_replyto", email);
-    payload.set(
-      "_subject",
-      `Portfolio enquiry from ${name || "visitor"}`
-    );
-
-    for (const [key, value] of formData.entries()) {
-      if (!payload.has(key) && key !== "website") {
-        payload.set(key, value);
-      }
-    }
-
-    return payload;
   };
 
   const getSubmitError = (result) => {
