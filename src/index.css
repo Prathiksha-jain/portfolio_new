@@ -280,3 +280,113 @@ section {
     touch-action: pan-y;
   }
 }
+
+@media (max-width: 1023px) {
+
+  .about-modal-overlay,
+  .skills-modal-overlay,
+  .project-modal,
+  .experience-modal-overlay {
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+
+    z-index: 10050 !important;
+
+    align-items: flex-start !important;
+    justify-content: center !important;
+
+    padding:
+      calc(76px + env(safe-area-inset-top))
+      12px
+      calc(14px + env(safe-area-inset-bottom)) !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+
+    overscroll-behavior: contain !important;
+
+    -webkit-overflow-scrolling: touch;
+
+    touch-action: pan-y !important;
+  }
+
+  .about-modal,
+  .skills-modal,
+  .project-modal-content,
+  .experience-modal {
+    width: min(100%, 680px) !important;
+
+    max-height:
+      calc(
+        100dvh
+        - 90px
+        - env(safe-area-inset-top)
+        - env(safe-area-inset-bottom)
+      ) !important;
+
+    margin: 0 auto !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+
+    overscroll-behavior: contain !important;
+
+    -webkit-overflow-scrolling: touch;
+
+    touch-action: pan-y !important;
+  }
+
+  .about-modal-close,
+  .skills-modal-close,
+  .project-modal-close,
+  .experience-modal-close {
+    position: sticky !important;
+
+    top: 0.35rem !important;
+    right: auto !important;
+
+    float: right;
+
+    z-index: 30 !important;
+
+    margin-left: 15px;
+    margin-bottom: 10px;
+
+    background:
+      rgba(8, 9, 20, 0.96) !important;
+  }
+
+  .experience-modal h3 {
+    padding-right: 0 !important;
+  }
+}
+
+@supports not (height: 100dvh) {
+
+  @media (max-width: 1023px) {
+
+    .about-modal-overlay,
+    .skills-modal-overlay,
+    .project-modal,
+    .experience-modal-overlay {
+      height: 100svh !important;
+      min-height: 100svh !important;
+    }
+
+    .about-modal,
+    .skills-modal,
+    .project-modal-content,
+    .experience-modal {
+      max-height:
+        calc(
+          100svh
+          - 90px
+          - env(safe-area-inset-top)
+          - env(safe-area-inset-bottom)
+        ) !important;
+    }
+  }
+}

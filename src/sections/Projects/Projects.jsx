@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { lockPageScroll } from "../../utils/lockPageScroll.js";
 import "./Projects.css";
 
 export default function Projects() {
@@ -148,15 +149,9 @@ export default function Projects() {
   ====================================================== */
 
   useEffect(() => {
-    if (activeProject) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!activeProject) return undefined;
 
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return lockPageScroll();
   }, [activeProject]);
 
   /* =====================================================

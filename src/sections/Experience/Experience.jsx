@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { lockPageScroll } from "../../utils/lockPageScroll.js";
 import "./Experience.css";
 
 
@@ -249,17 +250,7 @@ export default function Experience() {
 
     if (!activeModal) return;
 
-    const previousOverflow =
-      document.body.style.overflow;
-
-    document.body.style.overflow = "hidden";
-
-    return () => {
-
-      document.body.style.overflow =
-        previousOverflow;
-
-    };
+    return lockPageScroll();
 
   }, [activeModal]);
 

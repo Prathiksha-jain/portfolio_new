@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { skillGroups } from "../../data/skills.js";
+import { lockPageScroll } from "../../utils/lockPageScroll.js";
 import "./Skills.css";
 
 export default function Skills() {
@@ -75,15 +76,9 @@ export default function Skills() {
   ====================================================== */
 
   useEffect(() => {
-    if (activeSkill) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!activeSkill) return undefined;
 
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return lockPageScroll();
   }, [activeSkill]);
 
 

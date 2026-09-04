@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { personal } from "../../data/personal.js";
+import { lockPageScroll } from "../../utils/lockPageScroll.js";
 import "./About.css";
 
 export default function About() {
@@ -65,15 +66,9 @@ useEffect(() => {
 ===================================================== */
 
 useEffect(() => {
-  if (activeCard) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
+  if (!activeCard) return undefined;
 
-  return () => {
-    document.body.style.overflow = "";
-  };
+  return lockPageScroll();
 }, [activeCard]);
 
 
