@@ -8,7 +8,12 @@ export default function Contact() {
   const [isSending, setIsSending] = useState(false);
 
   const contactApiUrl =
-    import.meta.env.VITE_CONTACT_API_URL || "/api/contact";
+    import.meta.env.VITE_FORMSPREE_ENDPOINT ||
+    import.meta.env.VITE_CONTACT_API_URL ||
+    "/api/contact";
+
+  const usesFormspree =
+    contactApiUrl.includes("formspree.io");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,28 +25,47 @@ export default function Contact() {
     const message = String(formData.get("message") || "").trim();
     const website = String(formData.get("website") || "").trim();
 
+    if (website) {
+      form.reset();
+      setFormStatus("Message sent");
+      return;
+    }
+
     setIsSending(true);
     setFormStatus("Sending...");
 
     try {
-      const response = await fetch(contactApiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          website,
-        }),
-      });
+      const response = usesFormspree
+        ? await fetch(contactApiUrl, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+            },
+            body: createFormspreePayload({
+              email,
+              formData,
+              message,
+              name,
+            }),
+          })
+        : await fetch(contactApiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              message,
+              website,
+            }),
+          });
 
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
         throw new Error(
-          result.error || "Message could not be sent"
+          getSubmitError(result)
         );
       }
 
@@ -54,6 +78,45 @@ export default function Contact() {
     } finally {
       setIsSending(false);
     }
+  };
+
+  const createFormspreePayload = ({
+    email,
+    formData,
+    message,
+    name,
+  }) => {
+    const payload = new FormData();
+
+    payload.set("name", name);
+    payload.set("email", email);
+    payload.set("message", message);
+    payload.set("_replyto", email);
+    payload.set(
+      "_subject",
+      `Portfolio enquiry from ${name || "visitor"}`
+    );
+
+    for (const [key, value] of formData.entries()) {
+      if (!payload.has(key) && key !== "website") {
+        payload.set(key, value);
+      }
+    }
+
+    return payload;
+  };
+
+  const getSubmitError = (result) => {
+    if (result.error) return result.error;
+
+    if (Array.isArray(result.errors)) {
+      return result.errors
+        .map((item) => item.message)
+        .filter(Boolean)
+        .join(", ") || "Message could not be sent";
+    }
+
+    return "Message could not be sent";
   };
 
   const copyEmail = async () => {
